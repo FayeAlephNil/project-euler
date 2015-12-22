@@ -8,4 +8,4 @@ tripleProduct (a, b, c) = a * b * c
 problem9 :: IO ()
 problem9 = let
   tuple = head $ pythagTriplesOfSum 1000
-  in print $ (show tuple) ++ ": Product = " ++ (show $ tripleProduct tuple)
+  in print $ show tuple ++ ": Product = " ++ show (tripleProduct tuple)
