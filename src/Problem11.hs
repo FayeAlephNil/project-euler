@@ -2,6 +2,7 @@ module Problem11 where
 import Problem8
 import Data.List
 import Data.Tuple
+import Control.Arrow
 
 maxLength :: [[a]] -> Int
 maxLength xs = maximum $ map length xs
@@ -43,8 +44,8 @@ diagonals :: [[a]] -> [[a]]
 diagonals rs = map (map (\ (x, y) -> rs !! x !! y)) ourTriDiags
   where
     firstTriDiags = map triDiags [0..round $ (diagAmounts !! rsIndex) / 2]
-    lastTriDiags = map (map (\(x, y) -> (rsIndex - x, rsIndex - y))) firstTriDiags
-    ourTriDiags = nub $ firstTriDiags ++ (reverse lastTriDiags)
+    lastTriDiags = map (map ((-) rsIndex *** (-) rsIndex)) firstTriDiags
+    ourTriDiags = nub $ firstTriDiags ++ reverse lastTriDiags
     rsIndex = maxIndex rs
 
 rowsVertsDiags :: [[a]] -> [[[a]]]
