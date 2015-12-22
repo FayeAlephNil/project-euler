@@ -44,7 +44,7 @@ diagonals :: [[a]] -> [[a]]
 diagonals rs = map (map (\ (x, y) -> rs !! x !! y)) ourTriDiags
   where
     firstTriDiags = map triDiags [0..round $ (diagAmounts !! rsIndex) / 2]
-    lastTriDiags = map (map ((-) rsIndex *** (-) rsIndex)) firstTriDiags
+    lastTriDiags = map (map ((rsIndex -) *** (rsIndex -))) firstTriDiags
     ourTriDiags = nub $ firstTriDiags ++ reverse lastTriDiags
     rsIndex = maxIndex rs
 
