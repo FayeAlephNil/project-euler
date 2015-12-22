@@ -31,5 +31,7 @@ prime :: (Integral a)
 	-> Bool -- True if the number is prime, else False
 prime n = factors n == [1, abs n]
 
+primes = filter prime [2..]
+
 problem3 :: IO ()
 problem3 = print $ last $ primeFactors 600851475143

@@ -10,4 +10,4 @@ palindrome x = let
   in str == reverse str
 
 problem4 :: IO ()
-problem4 = print $ last $ sort $ filter palindrome products
+problem4 = print $ maximum $ filter palindrome products
