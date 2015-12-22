@@ -43,10 +43,14 @@ verticals rs = [map (!! v) rs | v <- [0..maxIndex rs]]
 diagonals :: [[a]] -> [[a]]
 diagonals rs = map (map (\ (x, y) -> rs !! x !! y)) ourTriDiags
   where
-    firstTriDiags = map triDiags [0..round $ (diagAmounts !! rsIndex) / 2]
-    lastTriDiags = map (map ((rsIndex -) *** (rsIndex -))) firstTriDiags
-    ourTriDiags = nub $ firstTriDiags ++ reverse lastTriDiags
+    firstTriDiags = [triDiags x | x <- [0..round $ (diagAmounts !! rsIndex) / 2]]
+    lastTriDiags = [map ((rsIndex -) *** (rsIndex -)) diag | diag <- firstTriDiags]
+    invert = map (map (first (vsIndex -)))
+    invertTriDiags = invert firstTriDiags
+    invertLastTriDiags = invert lastTriDiags
+    ourTriDiags = nub $ firstTriDiags ++ reverse lastTriDiags ++ invertTriDiags ++ reverse invertLastTriDiags
     rsIndex = maxIndex rs
+    vsIndex = maxIndex rs
 
 rowsVertsDiags :: [[a]] -> [[[a]]]
 rowsVertsDiags rs = [rs, verticals rs, diagonals rs]
