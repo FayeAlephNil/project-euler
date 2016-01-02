@@ -47,6 +47,7 @@ cabal-version:       >=1.10
 
 
 library
+  ghc-options: -fno-warn-tabs
   -- Modules exported by the library.
   exposed-modules: All
 
